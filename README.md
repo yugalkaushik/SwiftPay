@@ -1,1 +1,1 @@
-Basic Payment Application
+Basic Payment Application using MERN STACK
