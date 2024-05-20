@@ -1,7 +1,7 @@
 //SIGN IN COMPONENT FOR USER LOGIN
 
 import React,{useState} from "react";
-import exios from 'exios';
+import axios from 'axios';
 
 const Signin =() => {
     const [formData, setFormData] = useState({email:'',password: ''});

@@ -1,24 +1,19 @@
-const Dotenv  = require('dotenv');
 const express = require('express');
-const  mongoose = require('mongoose');
-const authRoutes = require('./routes/auth');
-const transactionRoutes = require('./routes/transactions');
-
-dotenv.config();
+const connectDB = require('./config/db');
+require('dotenv').config(); // Ensure dotenv is required and configured at the top
 
 const app = express();
 
-//connecting mongoose
-mongoose.connect(process.env.MONGO_URL, {userNewUrlParser:true, useUnifiedTopology:true})
-.then(()=> console.log('MongoDB Connected'))
-.catch(err => console.error(err));
+// Connect to MongoDB
+connectDB();
 
-//middleware
+// Middleware
 app.use(express.json());
 
-//routes
-app.use('/api/auth', authRoutes);
-app.use('/api/transactions', transactionRoutes);
+// Routes
+app.use('/api/auth', require('./routes/auth'));
+app.use('/api/transactions', require('./routes/transactions'));
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log('Server running on port ${PORT}'));
+
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
